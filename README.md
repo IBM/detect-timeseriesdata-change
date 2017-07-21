@@ -13,7 +13,7 @@ When you have completed this journey, you will understand how to
 5.Analyze these comparisons to detect any occurrence of Change points in the data between Previous data set and 
   Current data set
  
-
+![alt text](http://url/to/img.png)
 
 
 
