@@ -5,11 +5,13 @@ This journey takes you through end to end flow of steps in collating statistics 
 All the intermediary steps are modularized and all code open sourced to enable developers to use / modify the modules / sub-modules as they see fit for their specific application
 
 When you have completed this journey, you will understand how to
-1.	Read Sensor data for a single sensor
-2.	Extract 2 Time series datasets one in the past and another in the present
-3.	Compress these datasets by translating them into a bunch of statistics that accurately describe the characteristics of these datasets
-4.	Compare these statistics and quantify them 
-5.	Analyze these comparisons to detect any occurrence of Change points in the data between Previous data set and Current data set
+1.Read Sensor data for a single sensor
+2.Extract 2 Time series datasets one in the past and another in the present
+3.Compress these datasets by translating them into a bunch of statistics that accurately describe the characteristics 
+   of these datasets
+4.Compare these statistics and quantify them 
+5.Analyze these comparisons to detect any occurrence of Change points in the data between Previous data set and 
+  Current data set
  
 
 
