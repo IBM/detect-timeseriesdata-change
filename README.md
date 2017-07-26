@@ -145,6 +145,8 @@ There are several ways to execute the code cells in your notebook:
 
 The notebook outputs the results in the Notebook which can be copied to clipboard
 
+![](doc/source/images/cpd_line_plot.png)
+![](doc/source/images/cpd_box_plot.png)
 ![](doc/source/images/cpd_notebook_results.png)
 
 # Troubleshooting
@@ -154,4 +156,3 @@ The notebook outputs the results in the Notebook which can be copied to clipboar
 # License
 
 [Apache 2.0](LICENSE)
-
