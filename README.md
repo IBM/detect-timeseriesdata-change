@@ -27,7 +27,6 @@ This journey can be split into 2 major modules or sections:
 For this journey the start point is sensor data acquisition and storage of the same. Acquisition of sensor data is simulated in node-red as explained below.
  
 Node-red flow is designed as below:  
-
 ![png](doc/source/images/cpd_iot_nodered_flow.png)
 
 1.	The csv file with sample sensor data is uploaded in object storage
