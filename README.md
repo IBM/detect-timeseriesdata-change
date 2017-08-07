@@ -1,9 +1,10 @@
 
+
 # Change Point Detection in Time Series Sensor data
 
 This developer journey is intended for any Developer who wants to experiment, learn, enhance and implement a new method for Statistically detecting Change point in Sensor data. Sensors mounted on devices like IoT devices, Automated manufacturing like Robot arms, Process monitoring and Control equipment etc., collect and transmit data on a continuous basis which is Time stamped. 
 This journey takes you through end to end flow of steps in collating statistics on such Time series data and identify if a Change point has occurred. Core building blocks would include computing Statistical parameters from the Time series data, which compares a Previous dataset of a certain Time range in the past with the Current Series in a recent Time range. Statistical comparison between these two results in detection of any change points. R statistical software is used in this Journey with sample Sensor data loaded into the Data Science experience cloud.
-All the intermediary steps are modularized and all code open sourced to enable developers to use / modify the modules / sub-modules as they see fit for their specific application
+All the intermediary steps are modularized and all code open sourced to enable developers to use / modify the modules / sub-modules as they see fit for their specific application.
 
 This journey utilizes IoT sensor data and its primary goal is to statistically identify the change point in this sensor data rather than the acquisition and storage of the data itself. For sake of completeness of the flow, a simulation of the IoT data acquisition is included as a first step.
 
@@ -20,35 +21,36 @@ When you have completed this journey, you will understand how to
 * Output and save results in DSX Jupyter Notebook
 
 This journey can be split into 2 major modules or sections:
-1. Data acquisition and storage of IoT Sensor data using Node Red flows and dash DB
+1. Data acquisition and storage of IoT Sensor data using Node Red flows and DB2
 2. Data retrieval and statistical analysis using R - Jupyter notebooks to analyze and detect change points in the data
 
 ![png](doc/source/images/cpd_arch_flow.png)
 
-# 1. Data acquisition and storage of IoT Sensor data using Node Red flows and dash DB
-For this journey the start point is sensor data acquisition and storage of the same. Acquisition of sensor data is simulated in node-red as explained below.
+# 1. Data acquisition and storage of IoT Sensor data using Node Red flows and DB2
+For this journey the starting point is sensor data acquisition and storage of the same. Acquisition of sensor data is simulated in node-red as explained below.
 
-1. Log into Bluemix and creates a dash DB RDBMS warehouse service
-2. Create Node-RED flow App service to load IoT data into dash DB table by using the .json configuration file
-3. Import the sample data into a dash DB table using the Node-RED flow
+1. Log into Bluemix and create a DB2 RDBMS warehouse service
+2. Create Node-RED flow App service to load IoT data into DB2 table by using the provided [.json configuration file](configuration/node-red.json)
+3. Import the [sample data](data/sample_sensordata2016_1s3dys.csv) into a DB2 table using the Node-RED flow
 
 # 2. Data retrieval and statistical Change point detection using R - Jupyter notebooks
 
-1.	User logs into Data Science -> R Studio and selects the Sensor Time series data files in csv format from the local folder
-2.	User configures the parameters in R code flow to read the relevant subset from the Sensor data file
-3.	Data from the cloud database will be read by R Studio in Data Science Experience notebook
-4.	The user will further extract the 2 series of datasets to be compared
-5.	R Studio will use open R libraries and Custom built function components to get the statistics computed
-6.	User will generate visual comparison charts to aid visualizing any hints for changes in behavior of the sensor
-7.	These Statistical metrics will be compared and the changes analyzed using the Custom functions written in R
-8.	Based on the threshold deviation specified by the user, Custom R functions will then output if there is a Change point occurrence detected
-9.	Due to the reusable nature of the components, innumerable combination of data sets can be quickly compared for change point occurrence
+1.	Log into Data Science (DSX for short) -> R Spark Jupyter Notebook and import the R flow from [.ipynb file](notebooks/watson_changepoint_detection_v2.ipynb)
+2.  Insert the credentials from the Data connections or modify the connection details to connect to source DB2
+3.	User configures the parameters in R code flow to read the relevant Sensor data subset from the DB2 table
+4.	Data from the cloud database will be read by R Spark dataframe in DSX notebook
+5.	The user will further extract the 2 series of datasets to be compared
+6.	R notebook will use open R libraries and Custom built function components to get the statistics computed
+7.	User will generate visual comparison charts to get visual insights on changes in behavior of the sensor values
+8.	These Statistical metrics will be compared and the changes analyzed using the Custom functions written in R
+9.	Based on the threshold deviation specified by the user, Custom R functions will then output if there is a Change point occurrence detected
+10.	Due to the configurable and reusable nature of the components, innumerable combination of data sets can be quickly compared for change point occurrence
 
 Developer can reuse all components that support the above steps like
-1.	Reading specific Time series data points from a csv file like Time stamp, Sensor ID, Sensor values
+1.	Reading specific Time series data points from database like Time stamp, Sensor ID, Sensor values
 2.	Time stamp conversion functions, filtering data for specific sensor
 3.	User configurable Time ranges for Splitting Time series data into 2 sets for comparison
-4.	Computations of key statistics that statistically compresses these series for useful comparison
+4.	Computations of key statistics that statistically compress these series for useful comparison
 5.	Build a dictionary of statistics to consistently compare these data sets
 6.	Based on threshold specified by User, detect if a Change point has occurred in the data
 
@@ -97,11 +99,9 @@ Create the following Bluemix service by following the link to use the Bluemix UI
   ![](doc/source/images/cpd_dsx_menu.png.png)
   ![](doc/source/images/cpd_dsx_createservice.png)
 
-  * [**Getting started with dash DB for Analytics**](https://www.youtube.com/watch?v=CMFo4EtQ_ao)
-  * [**dash DB for Analytics**](https://www.youtube.com/watch?v=CMFo4EtQ_ao)
+  * [**DB2 Warehouse for Analytics**](https://www.youtube.com/watch?v=CMFo4EtQ_ao)
 
     ![](doc/source/images/cpd_db2whs_onbluemix.png)
-
  
 ## 3. Create Node-RED App and inject IoT data
 
@@ -114,30 +114,31 @@ Node-red flow is designed as:
 ![png](doc/source/images/cpd_iot_nodered_flow.png)
 
 1.	The csv file with sample sensor data is uploaded in object storage
-2.  Create Node-RED flow by importing the [configuration .json](configuration/node-red.json)
-3.	Prepare a csv string [from the sample data file](data/sample_sensordata2016_1s3dys.csv) and give this string input to csv node
-4.	Csv node will trigger an event for temperature sensor for each row of data
-5.	This event in-turn will be received by IBM IoT Platform
-6.	Prepare data to put in dashDB and then store data in dashdb
-7.	Data from dashdb can be used in R for analytics
+2.	Prepare a csv string [from the sample data file](data/sample_sensordata2016_1s3dys.csv) and give this string, as an input to csv node
+3.	csv node will trigger an event of temperature sensor for each row of data
+4.	This event in-turn will be received by IBM IoT Platform
+5.	This data will be prepared and then stored in the database
+6.	Data from DB can be used in R Jupyter notebook for analytics
 
-After importing this node-red flow, you need to configure following nodes ‘s credentials:
-1.	Object Storage Node: Provide your object storage service credentials. Configure node in buffer mode to read a file from your object storage service. 
+Create Node-RED flow by importing the [configuration .json](configuration/node-red.json)
+
+Adjustments to the node properties needs to be made as below:  
+Prior to making the below changes, ensure the sample data is loaded into Object storage.
+1.	Object Storage Node: Provide your object storage service credentials. Configure node in buffer mode to read the file from your object storage service. 
 2.	Watson-IoT node: Configure this with a registered device on Watson IoT Platform. For more information in this, reference: https://developer.ibm.com/recipes/tutorials/simulating-a-device-and-publishing-034messages034-to-ibm-iot-platform-from-a-nodered-034watson-iot034-platform-node/
 3.	IBM IoT node: Configure IBM IoT node to receive events from Watson IoT Platform (from step 6). You can reference step 5 in https://developer.ibm.com/recipes/tutorials/getting-started-with-watson-iot-platform-using-node-red/ for the same.
-4.	Dash DB Node: Use your DB2 on Warehouse service. Provide database table name in which you want to populate sensor data. This sample uses Tablename as ‘PLATFORMDATA’.  Before this, you need to create database table with following schema in your service instance: 
+4.	dash-DB Node: Use your DB2 on Warehouse service. Provide database table name in which you want to populate sensor data. This sample uses tablename as ‘CHANGEPOINTIOT’.  Before this, you need to create database table with following schema in your service instance:  
+          {  
+                       SENSORID VARCHAR(20)  
+                       TIMESTAMP VARCHAR(100)  
+                       SENSORVALUE DECIMAL(8,5)  
+                       SENSORUNITS VARCHAR(100)  
+          }  
 
- {  
-   SENSORID VARCHAR(20)  
-   TIMESTAMP VARCHAR(100)  
-   SENSORVALUE DECIMAL(8,5)  
-   SENSORUNITS VARCHAR(100)  
- }
+Once all configuration is done, inject the data, data will get stored to DB2.
 
-You can configure your sensor directly with Watson IoT node in node red as mentioned in step 2 above.
+* [Sample Node-RED flow](https://ui-journey1.mybluemix.net/red/#flow/a9acee2f.4591e)
 
-Once all configuration is done, inject the data, data will get stored to dash db.
- 
 ## 4. Create the R Spark Jupyter notebook
 
 Use the menu on the left to select `My Projects` and then `Default Project`.
@@ -155,14 +156,16 @@ Click on `Add notebooks` (upper right) to create a notebook.
 
 #### Add the data and configuration to the notebook
 Use `Find and Add Data` (look for the `10/01` icon)
-and its `Files` tab. From there you can click
-`browse` and add data and configuration files from your computer.
+and its `Connectsions` tab. You must be able to see your database connection created earlier.
+From there you can click `Insert to Code` under the 'Data connection' list and add ibm DBR code
+with connection credentials to the flow.
 
-> Note:  If you don't have your own data and configuration files, you can get our example by cloning
-this git repo. Look in the `data/sample_sensordata2016.csv` directory for data file and in the `configuration/sample_config.txt`.
-If you use configuration file from your computer, make sure to conform to the JSON structure given in `configuration/sample_config.txt`.
+![png](doc/source/images/cpd_connreaddata_fromdashdb.png)
 
-![](doc/source/images/cpd_upload_datafile.png)
+> Note:  If you don't have your own data and configuration files, you can reuse our example in the "Read IoT Sensor data from database"
+section. Look in the `data/sensordata2016_1s3dys.csv` directory for data file.
+
+![](doc/source/images/cpd_readdata_fromdashdb.png)
 
 #### Fix-up variable names
 Once the files have been uploaded into ``DSX-ObjectStore`` you need to update the variables that refer to the data and configuration files in the R - Jupyter Notebook.
@@ -208,7 +211,7 @@ The notebook outputs the results in the Notebook which can be copied to clipboar
 
 # Troubleshooting
 
-[See DEBUGGING.md.](DEBUGGING.md)
+[See DEBUGGING.md](DEBUGGING.md)
 
 # License
 
