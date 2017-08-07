@@ -23,15 +23,99 @@ This journey can be split into 2 major modules or sections:
 1. Data acquisition and storage of IoT Sensor data using Node Red flows and dash DB
 2. Data retrieval and statistical analysis using R - Jupyter notebooks to analyze and detect change points in the data
 
+![png](doc/source/images/cpd_arch_flow.png)
+
 # 1. Data acquisition and storage of IoT Sensor data using Node Red flows and dash DB
 For this journey the start point is sensor data acquisition and storage of the same. Acquisition of sensor data is simulated in node-red as explained below.
+
+1. Log into Bluemix and creates a dash DB RDBMS warehouse service
+2. Create Node-RED flow App service to load IoT data into dash DB table by using the .json configuration file
+3. Import the sample data into a dash DB table using the Node-RED flow
+
+# 2. Data retrieval and statistical Change point detection using R - Jupyter notebooks
+
+1.	User logs into Data Science -> R Studio and selects the Sensor Time series data files in csv format from the local folder
+2.	User configures the parameters in R code flow to read the relevant subset from the Sensor data file
+3.	Data from the cloud database will be read by R Studio in Data Science Experience notebook
+4.	The user will further extract the 2 series of datasets to be compared
+5.	R Studio will use open R libraries and Custom built function components to get the statistics computed
+6.	User will generate visual comparison charts to aid visualizing any hints for changes in behavior of the sensor
+7.	These Statistical metrics will be compared and the changes analyzed using the Custom functions written in R
+8.	Based on the threshold deviation specified by the user, Custom R functions will then output if there is a Change point occurrence detected
+9.	Due to the reusable nature of the components, innumerable combination of data sets can be quickly compared for change point occurrence
+
+Developer can reuse all components that support the above steps like
+1.	Reading specific Time series data points from a csv file like Time stamp, Sensor ID, Sensor values
+2.	Time stamp conversion functions, filtering data for specific sensor
+3.	User configurable Time ranges for Splitting Time series data into 2 sets for comparison
+4.	Computations of key statistics that statistically compresses these series for useful comparison
+5.	Build a dictionary of statistics to consistently compare these data sets
+6.	Based on threshold specified by User, detect if a Change point has occurred in the data
+
+## Included components
+
+* [IBM Node-RED Cloud Foundry App](https://console.bluemix.net/catalog/starters/node-red-starter): Develop, deploy, and scale server-side JavaScript® apps with ease. The IBM SDK for Node.js™ provides enhanced performance, security, and serviceability.
+
+* [IBM Data Science Experience](https://www.ibm.com/bs-en/marketplace/data-science-experience): Analyze data using RStudio, Jupyter, and Python in a configured, collaborative environment that includes IBM value-adds, such as managed Spark.
+
+* [DB2 Warehouse on cloud](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud): IBM Db2 Warehouse on Cloud is a fully-managed, enterprise-class, cloud data warehouse service. Powered by IBM BLU Acceleration.
+
+* [Bluemix Object Storage](https://console.ng.bluemix.net/catalog/services/object-storage/?cm_sp=dw-bluemix-_-code-_-devcenter): A Bluemix service that provides an unstructured cloud data store to build and deliver cost effective apps and services with high reliability and fast speed to market.
+
+* [IoT Platform](https://console.bluemix.net/catalog/services/internet-of-things-platform): This service is the hub for IBM Watson IoT and lets you communicate with and consume data from connected devices and gateways. Use the built-in web console dashboards to monitor your IoT data and analyze it in real time.
+
+## Featured technologies
+
+* [Jupyter Notebooks](http://jupyter.org/): An open-source web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
+
+# Watch the Video
+
+# Steps
+
+Follow these steps to setup and run this developer journey. The steps are
+described in detail below.
+
+1. [Sign up for the Data Science Experience](#1-sign-up-for-the-data-science-experience)
+1. [Create Bluemix services](#2-create-bluemix-services)
+1. [Create Node-RED App and inject IoT data](#3-create-nodered-services)
+1. [Create the notebook](#4-create-the-notebook)
+1. [Add the data and configuraton file](#5-add-the-data-config-file)
+1. [Update the notebook with service credentials](#6-update-the-notebook-service-credential)
+1. [Run the notebook](#7-run-the-notebook)
+1. [Download the results](#8-download-the-results)
+
+## 1. Sign up for the Data Science Experience
+
+Sign up for IBM's [Data Science Experience](http://datascience.ibm.com/). By signing up for the Data Science Experience, two services: ``DSX-Spark`` and ``DSX-ObjectStore`` will be created in your Bluemix account.
+
+## 2. Create Bluemix services
+
+Create the following Bluemix service by following the link to use the Bluemix UI and create it.
+
+  * [**Data Science Experience**](https://console.bluemix.net/catalog/services/data-science-experience)
+
+  ![](doc/source/images/cpd_dsx_menu.png.png)
+  ![](doc/source/images/cpd_dsx_createservice.png)
+
+  * [**Getting started with dash DB for Analytics**](https://www.youtube.com/watch?v=CMFo4EtQ_ao)
+  * [**dash DB for Analytics**](https://www.youtube.com/watch?v=CMFo4EtQ_ao)
+
+    ![](doc/source/images/cpd_db2whs_onbluemix.png)
+
  
-Node-red flow is designed as below:  
+## 3. Create Node-RED App and inject IoT data
+
+![png](doc/source/images/cpd_bmx_nodered_menu.png)
+![png](doc/source/images/cpd_bmx_nodered_create.png)
+
+
+Node-red flow is designed as:  
+
 ![png](doc/source/images/cpd_iot_nodered_flow.png)
 
 1.	The csv file with sample sensor data is uploaded in object storage
-2.	Read file from object storage
-3.	Prepare a csv string and give this string input to csv node
+2.  Create Node-RED flow by importing the [configuration .json](configuration/node-red.json)
+3.	Prepare a csv string [from the sample data file](data/sample_sensordata2016_1s3dys.csv) and give this string input to csv node
 4.	Csv node will trigger an event for temperature sensor for each row of data
 5.	This event in-turn will be received by IBM IoT Platform
 6.	Prepare data to put in dashDB and then store data in dashdb
@@ -53,78 +137,8 @@ After importing this node-red flow, you need to configure following nodes ‘s c
 You can configure your sensor directly with Watson IoT node in node red as mentioned in step 2 above.
 
 Once all configuration is done, inject the data, data will get stored to dash db.
-
-# 2. Data retrieval and statistical Change point detection using R - Jupyter notebooks
-
-1.	User logs into Data Science -> R Studio and selects the Sensor Time series data files in csv format from the local folder
-2.	User configures the parameters in R code flow to read the relevant subset from the Sensor data file
-3.	Data from the cloud database will be read by R Studio in Data Science Experience notebook
-4.	The user will further extract the 2 series of datasets to be compared
-5.	R Studio will use open R libraries and Custom built function components to get the statistics computed
-6.	User will generate visual comparison charts to aid visualizing any hints for changes in behavior of the sensor
-7.	These Statistical metrics will be compared and the changes analyzed using the Custom functions written in R
-8.	Based on the threshold deviation specified by the user, Custom R functions will then output if there is a Change point occurrence detected
-9.	Due to the reusable nature of the components, innumerable combination of data sets can be quickly compared for change point occurrence
-
-![png](doc/source/images/cpd_arch_flow.png)
-
-Developer can reuse all components that support the above steps like
-1.	Reading specific Time series data points from a csv file like Time stamp, Sensor ID, Sensor values
-2.	Time stamp conversion functions, filtering data for specific sensor
-3.	User configurable Time ranges for Splitting Time series data into 2 sets for comparison
-4.	Computations of key statistics that statistically compresses these series for useful comparison
-5.	Build a dictionary of statistics to consistently compare these data sets
-6.	Based on threshold specified by User, detect if a Change point has occurred in the data
-
-## Included components
-
-* 
-
-* [IBM Data Science Experience](https://www.ibm.com/bs-en/marketplace/data-science-experience): Analyze data using RStudio, Jupyter, and Python in a configured, collaborative environment that includes IBM value-adds, such as managed Spark.
-
-* [Bluemix Object Storage](https://console.ng.bluemix.net/catalog/services/object-storage/?cm_sp=dw-bluemix-_-code-_-devcenter): A Bluemix service that provides an unstructured cloud data store to build and deliver cost effective apps and services with high reliability and fast speed to market.
-
-
-## Featured technologies
-
-* [Jupyter Notebooks](http://jupyter.org/): An open-source web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
-
-# Watch the Video
-
-# Steps
-
-Follow these steps to setup and run this developer journey. The steps are
-described in detail below.
-
-1. [Sign up for the Data Science Experience](#1-sign-up-for-the-data-science-experience)
-1. [Create Bluemix services](#2-create-bluemix-services)
-1. [Create the notebook](#3-create-the-notebook)
-1. [Add the data and configuraton file](#4-add-the-data-config-file)
-1. [Update the notebook with service credentials](#5-update-the-notebook-service-credential)
-1. [Run the notebook](#6-run-the-notebook)
-1. [Download the results](#7-download-the-results)
-
-## 1. Sign up for the Data Science Experience
-
-Sign up for IBM's [Data Science Experience](http://datascience.ibm.com/). By signing up for the Data Science Experience, two services: ``DSX-Spark`` and ``DSX-ObjectStore`` will be created in your Bluemix account.
-
-## 2. Create Bluemix services
-
-Create the following Bluemix service by following the link to use the Bluemix UI and create it.
-
-  * [**Data Science Experience**](https://console.bluemix.net/catalog/services/data-science-experience)
-
-  ![](doc/source/images/cpd_dsx_menu.png.png)
-  ![](doc/source/images/cpd_dsx_createservice.png)
-
-
-  * [**Getting started with dash DB for Analytics**](https://www.youtube.com/watch?v=CMFo4EtQ_ao)
-  * [**dash DB for Analytics**](https://www.youtube.com/watch?v=CMFo4EtQ_ao)
-
-    ![](doc/source/images/cpd_db2_onbluemix.png)
  
-  
-## 3. Create the notebook
+## 4. Create the R Spark Jupyter notebook
 
 Use the menu on the left to select `My Projects` and then `Default Project`.
 Click on `Add notebooks` (upper right) to create a notebook.
@@ -137,7 +151,7 @@ Click on `Add notebooks` (upper right) to create a notebook.
 
 ![](doc/source/images/cpd_create_rsparknotebook.png)
 
-## 4. Add the data and configuration file
+## 5. Add the data and configuration file
 
 #### Add the data and configuration to the notebook
 Use `Find and Add Data` (look for the `10/01` icon)
@@ -151,16 +165,14 @@ If you use configuration file from your computer, make sure to conform to the JS
 ![](doc/source/images/cpd_upload_datafile.png)
 
 #### Fix-up variable names
-Once the files have been uploaded into ``DSX-ObjectStore`` you need to update the variables that refer to the data and configuration files in the Jupyter Notebook.
+Once the files have been uploaded into ``DSX-ObjectStore`` you need to update the variables that refer to the data and configuration files in the R - Jupyter Notebook.
 
-In the notebook, update the global variables the in cell following `2.3 Global Variables` section.
+In the notebook, update the configuration parameter values the in cell following `Configure Parameters` section.
 
-Replace the `sampleDataFileName` with the name of the data file and `sampleConfigFileName` with the configuration file name.
-
-![](doc/source/images/cpd_addglobalvar.png)
+![](doc/source/images/cpd_dsxconfigure_params.png)
 
 
-## 5. Run the notebook
+## 6. Run the notebook
 
 When a notebook is executed, what is actually happening is that each code cell in
 the notebook is executed, in order, from top to bottom.
@@ -186,7 +198,7 @@ There are several ways to execute the code cells in your notebook:
     panel. Here you can schedule your notebook to be executed once at some future
     time, or repeatedly at your specified interval.
 
-## 6. View the results
+## 7. View the results
 
 The notebook outputs the results in the Notebook which can be copied to clipboard
 
