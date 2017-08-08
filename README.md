@@ -24,7 +24,7 @@ This journey can be split into 2 major modules or sections:
 1. Data acquisition and storage of IoT Sensor data using Node Red flows and DB2
 2. Data retrieval and statistical analysis using R - Jupyter notebooks to analyze and detect change points in the data
 
-![png](doc/source/images/cpd_arch_flow.png)
+![png](doc/source/images/cpd_arch_flow1.png)
 
 # 1. Data acquisition and storage of IoT Sensor data using Node Red flows and DB2
 For this journey the starting point is sensor data acquisition and storage of the same. Acquisition of sensor data is simulated in node-red as explained below.
