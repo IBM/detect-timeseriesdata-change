@@ -147,7 +147,7 @@ Click on `Add notebooks` (upper right) to create a notebook.
 * Select the `From URL` tab.
 * Enter a name for the notebook.
 * Optionally, enter a description for the notebook.
-* Enter this Notebook URL: https://github.com/dkprabu/changepoint1/blob/master/notebooks/watson_changepoint_detection.ipynb
+* Enter this Notebook URL: https://github.com/IBM/detect-timeseriesdata-change/blob/master/notebooks/watson_changepoint_detection.ipynb
 * Click the `Create Notebook` button.
 
 ![](doc/source/images/cpd_create_rsparknotebook.png)
