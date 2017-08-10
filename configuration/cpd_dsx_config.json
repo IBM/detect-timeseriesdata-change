@@ -1,0 +1,50 @@
+[
+	{
+	"paramname": "coltimestamp",
+		"paramvalue": "TIMESTAMP"
+	},
+	{
+	"paramname": "colsensorid",
+		"paramvalue": "SENSORID"
+	},
+	{
+	"paramname": "colsensorvalue",
+		"paramvalue": "SENSORVALUE"
+	},
+	{
+	"paramname": "sensorid",
+		"paramvalue": "3B1"
+	},
+	{
+	"paramname": "datatimeformat",
+		"paramvalue": "%d-%m-%Y %H:%M:%S"
+	},
+	{
+	"paramname": "intimezone",
+		"paramvalue": "GMT"
+	},
+	{
+	"paramname": "rangetimeformat",
+		"paramvalue": "%Y%m%d %H:%M:%S"
+	},
+	{
+	"paramname": "Pfrom",
+		"paramvalue": "20160324 00:00:00"
+	},
+	{
+	"paramname": "Pto",
+		"paramvalue": "20160325 00:00:00"
+	},
+	{
+	"paramname": "Cfrom",
+		"paramvalue": "20160325 00:00:00"
+	},
+	{
+	"paramname": "Cto",
+		"paramvalue": "20160326 00:00:00"
+	},
+ 	{
+	"paramname": "thresholdpercent",
+		"paramvalue": 25
+	}
+]
