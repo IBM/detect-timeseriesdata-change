@@ -24,8 +24,8 @@ This journey can be split into 2 major modules or sections:
 1. Data acquisition and storage of IoT Sensor data using Node Red flows and DB2
 2. Data retrieval and statistical analysis using R - Jupyter notebooks to analyze and detect change points in the data
 
-![png](doc/source/images/cpd_arch_flow1.png)
- 
+![png](doc/source/images/cpd_arch_flow.png)
+
 # 1. Data acquisition and storage of IoT Sensor data using Node Red flows and DB2
 For this journey the starting point is sensor data acquisition and storage of the same. Acquisition of sensor data is simulated in node-red as explained below.
 
@@ -37,14 +37,15 @@ For this journey the starting point is sensor data acquisition and storage of th
 
 1.	Log into Data Science (DSX for short) -> R Spark Jupyter Notebook and import the R flow from [.ipynb file](notebooks/watson_changepoint_detection_v2.ipynb)
 2.  Insert the credentials from the Data connections or modify the connection details to connect to source DB2
-3.	User configures the parameters in R code flow to read the relevant Sensor data subset from the DB2 table
-4.	Data from the cloud database will be read by R Spark dataframe in DSX notebook
-5.	The user will further extract the 2 series of datasets to be compared
-6.	R notebook will use open R libraries and Custom built function components to get the statistics computed
-7.	User will generate visual comparison charts to get visual insights on changes in behavior of the sensor values
-8.	These Statistical metrics will be compared and the changes analyzed using the Custom functions written in R
-9.	Based on the threshold deviation specified by the user, Custom R functions will then output if there is a Change point occurrence detected
-10.	Due to the configurable and reusable nature of the components, innumerable combination of data sets can be quickly compared for change point occurrence
+3.	User configures the parameters in [.json dsx configuration file](configuration/cpd_dsx_config.json) and updates credentials to read the configuration file
+4.  User then updates credentials to read relevant Sensor data subset from the DB2 table
+5.	Data from the cloud database will be read by R Spark dataframe in DSX notebook
+6.	The user will further extract the 2 series of datasets to be compared
+7.	R notebook will use open R libraries and Custom built function components to get the statistics computed
+8.	User will generate visual comparison charts to get visual insights on changes in behavior of the sensor values
+9.	These Statistical metrics will be compared and the changes analyzed using the Custom functions written in R
+10.	Based on the threshold deviation specified by the user, Custom R functions will then output if there is a Change point occurrence detected
+11.	Due to the configurable and reusable nature of the components, innumerable combination of data sets can be quickly compared for change point occurrence
 
 Developer can reuse all components that support the above steps like
 1.	Reading specific Time series data points from database like Time stamp, Sensor ID, Sensor values
@@ -147,12 +148,54 @@ Click on `Add notebooks` (upper right) to create a notebook.
 * Select the `From URL` tab.
 * Enter a name for the notebook.
 * Optionally, enter a description for the notebook.
-* Enter this Notebook URL: https://github.com/IBM/detect-timeseriesdata-change/blob/master/notebooks/watson_changepoint_detection.ipynb
+* Enter this Notebook URL:  
+  https://github.com/IBM/detect-timeseriesdata-change/blob/master/notebooks/watson_changepoint_detection.ipynb
 * Click the `Create Notebook` button.
 
-![](doc/source/images/cpd_create_rsparknotebook.png)
+![](doc/source/images/cpd_create_rsparknotebook.png)  
+* Upload the sample .json DSX configuration file to Object storage from URL:  
+  https://github.com/IBM/detect-timeseriesdata-change/blob/master/configuration/cpd_dsx_config.json
 
-## 5. Add the data and configuration file
+## 5. Add the configuration and data access details
+
+#### Fix-up configuration parameter .json file name and values
+
+Once the files have been uploaded into ``DSX-ObjectStore`` you need to update the variables that refer to the .json configuration files in the R - Jupyter Notebook.
+
+In the notebook, update the DSX configuration .json file name in section 2.1.1 
+![png](doc/source/images/cpd_dsxconfig_setfilename.png)
+
+Edit the [DSX configuration .json file](configuration/cpd_dsx_config.json)  
+Update the `paramvalue` ONLY to suit your requirements and save the .json file  
+Retain the rest of the format and composition of the .json file  
+
+![png](doc/source/images/cpd_dsxconfig_json.png)
+
+The descriptions of the parameters that can be configured are as below.
+1. coltimestamp: Name of the column which holds the Time stamp of data 
+  recorded by Sensor
+2. colsensorid: Name of the column which holds the Sensor identification
+3. colsensorvalue: Name of the column that stores the values measured by sensor
+4. sensorid: Sensor ID for which the analysis needs to be applied
+5. datatimeformat: Time format of the data in the data frame
+6. intimezone: Time zone for the Time stamps
+7. rangetimeformat: Time format which is used for specifying the time ranges
+8. Pfrom: Start Time for first series Time range
+9. Pto: End Time for first series Time range
+10. Cfrom: Start Time for second series Time range
+11. Cto: End Time for second series Time range
+12. thresholdpercent: Set the threshold percentage of change if detected
+
+
+* In section 2.1.2 of DSX notebook, Insert (replace) your own Object storage 
+file credentials to read the .json configuration file
+* Also replace the function name in the block that Read json configuration file
+in section 2.1.3
+
+![png](doc/source/images/cpd_dsxjson_creds.png)
+![png](doc/source/images/cpd_dsxconfig_jsonread.png)
+
+
 
 #### Add the data and configuration to the notebook
 Use `Find and Add Data` (look for the `10/01` icon)
@@ -166,13 +209,6 @@ with connection credentials to the flow.
 section. Look in the `data/sensordata2016_1s3dys.csv` directory for data file.
 
 ![](doc/source/images/cpd_readdata_fromdashdb.png)
-
-#### Fix-up variable names
-Once the files have been uploaded into ``DSX-ObjectStore`` you need to update the variables that refer to the data and configuration files in the R - Jupyter Notebook.
-
-In the notebook, update the configuration parameter values the in cell following `Configure Parameters` section.
-
-![](doc/source/images/cpd_dsxconfigure_params.png)
 
 
 ## 6. Run the notebook
