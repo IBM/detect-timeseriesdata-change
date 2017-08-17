@@ -98,8 +98,7 @@ Create the following Bluemix service by following the link to use the Bluemix UI
     ![png](doc/source/images/cpd_bmx_objstorage_menu.png)  
     
     1. Choose the region and create a Container unit
-    2. Now you can add files in the Container
-    3. Upload the sample data file in Object storage
+    2. Upload the sample data file in Object storage Container
     
 
   * [**DB2 Warehouse on Cloud**](https://www.youtube.com/watch?v=CMFo4EtQ_ao)
@@ -144,14 +143,14 @@ Node-red flow is designed as:
 6.	Data from DB can be used in R Jupyter notebook for analytics
 
 Adjustments to the node properties needs to be made as below:  
-Prior to making the below changes, ensure the sample data is loaded into Object storage.
+Prior to making the below changes, ensure the sample data is loaded into Object storage as explained in Create Bluemix Services section above.
 1.	Object Storage node (getFileData_in_buffer): Provide your object storage service credentials. Configure node in buffer mode to read the file from your object storage service. 
 2.	Watson-IoT node (TemperatureSensor): Configure this with a registered device on Watson IoT Platform. To register a device on Watson IoT Platform, refer to step 1 to step 4 in https://developer.ibm.com/recipes/tutorials/how-to-register-devices-in-ibm-iot-foundation/  
 To configure Watson IoT node in node-red, refer to : https://developer.ibm.com/recipes/tutorials/simulating-a-device-and-publishing-034messages034-to-ibm-iot-platform-from-a-nodered-034watson-iot034-platform-node/
 3.	IBM IoT node: Configure IBM IoT node to receive events from Watson IoT Platform. To configure IBM IoT Node, you need to have API Keys to establish a connection to IoT Platform from your application. Refer step 5 in https://developer.ibm.com/recipes/tutorials/how-to-register-devices-in-ibm-iot-foundation/ to generate API Keys.  
 To setup IBM IoT Node in node-red refer to step 5 in
 https://developer.ibm.com/recipes/tutorials/getting-started-with-watson-iot-platform-using-node-red/  
-4.	dash-DB node (CHANGEPOINTIOT): Use your DB2 on Warehouse service. Provide database table name in which you want to populate sensor data. This sample uses tablename as ‘CHANGEPOINTIOT’.  Before this, you need to create database table with following schema in your service instance:  
+4.	dash-DB node (CHANGEPOINTIOT): Use credentials of DB2 Warehouse on Cloud service. Provide database table name in which you want to populate sensor data. This sample uses tablename as ‘CHANGEPOINTIOT’.  Before this, you need to create database table with following schema in your service instance:  
           {  
                        SENSORID VARCHAR(20)  
                        TIMESTAMP VARCHAR(100)  
