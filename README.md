@@ -94,7 +94,6 @@ Sign up for IBM's [Data Science Experience](http://datascience.ibm.com/). By sig
 
 Create the following Bluemix service by following the link to use the Bluemix UI and create it.
   * [**Object Storage in Blue mix**](https://console.bluemix.net/docs/services/ObjectStorage/index.html)  
-    [Object storage recipe](https://developer.ibm.com/recipes/tutorials/use-pkgcloud-to-access-ibm-object-storage-for-bluemix-with-node-js/)  
     ![png](doc/source/images/cpd_bmx_objstorage_menu.png)  
     
     1. Choose the region and create a Container unit
