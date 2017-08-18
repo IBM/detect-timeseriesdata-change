@@ -151,7 +151,7 @@ To configure Watson IoT node in node-red, refer to : https://developer.ibm.com/r
 3.	IBM IoT node: Configure IBM IoT node to receive events from Watson IoT Platform. To configure IBM IoT Node, you need to have API Keys to establish a connection to IoT Platform from your application. Refer step 5 in https://developer.ibm.com/recipes/tutorials/how-to-register-devices-in-ibm-iot-foundation/ to generate API Keys.  
 To setup IBM IoT Node in node-red refer to step 5 in
 https://developer.ibm.com/recipes/tutorials/getting-started-with-watson-iot-platform-using-node-red/  
-4.	dash-DB node (CHANGEPOINTIOT): Use credentials of DB2 Warehouse on Cloud service. Provide database table name in which you want to populate sensor data. This sample uses tablename as ‘CHANGEPOINTIOT’.  Before this, you need to create database table with following schema in your service instance:  
+4.	dash DB node (CHANGEPOINTIOT): Use credentials of DB2 Warehouse on Cloud service. Provide database table name in which you want to populate sensor data. This sample uses tablename as ‘CHANGEPOINTIOT’.  Before this, you need to create database table with following schema in your service instance:  
           {  
                        SENSORID VARCHAR(20)  
                        TIMESTAMP VARCHAR(100)  
