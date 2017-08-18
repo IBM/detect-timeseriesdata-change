@@ -114,7 +114,12 @@ Create the following Bluemix service by following the link to use the Bluemix UI
  
 ## 3. Create Node-RED App and inject IoT data
 
-Launch node-red dashboard. You need to install following nodes before importing the flow:
+Create the Node-RED starter App
+
+![png](doc/source/images/cpd_bmx_nodered_menu.png)
+![png](doc/source/images/cpd_bmx_nodered_create.png)
+
+Launch node-red flow editor. You need to install following nodes before importing the flow:
 
 * node-red-contrib-objectstore
 * node-red-contrib-ibm-watson-iot  
@@ -126,9 +131,6 @@ For more details, you can refer to:
 https://nodered.org/docs/getting-started/adding-nodes
 
 #### Create Node-RED flow by importing the [configuration .json](configuration/node-red.json)  
-
-![png](doc/source/images/cpd_bmx_nodered_menu.png)
-![png](doc/source/images/cpd_bmx_nodered_create.png)
 
 
 Node-red flow is designed as:  
@@ -158,7 +160,8 @@ https://developer.ibm.com/recipes/tutorials/getting-started-with-watson-iot-plat
                        SENSORUNITS VARCHAR(100)  
           }  
 
-Once all configuration is done, inject the data, data will get stored to DB2.
+Once all configuration is done, deploy the Node-RED flow.  
+Inject the data, data will get stored to DB2.
 
 ## 4. Create the R Spark Jupyter notebook
 
@@ -272,4 +275,3 @@ The notebook outputs the results in the Notebook which can be copied to clipboar
 # License
 
 [Apache 2.0](LICENSE)
-
