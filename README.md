@@ -70,7 +70,7 @@ Developer can reuse all components that support the above steps like
 
 * [Jupyter Notebooks](http://jupyter.org/): An open-source web application that allows you to create and share documents that contain live code, equations, visualizations and explanatory text.
 
-# [Watch the Video](https://www.youtube.com/watch?v=otaA8sE6G8A&list=PLjVyXYXmzc6Lbd_50pZKPLdbrQ9DBKgJm)
+# [Watch the Video](https://youtu.be/SKRYaz7nMEs)
 
 # Steps
 
