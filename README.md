@@ -89,12 +89,17 @@ Sign up for IBM's [Data Science Experience](http://datascience.ibm.com/). By sig
 
 ## 2. Create Bluemix services
 
-Create the following Bluemix service by following the link to use the Bluemix UI and create it.
-  * [**Object Storage in Blue mix**](https://console.bluemix.net/docs/services/ObjectStorage/index.html)  
+Create the following Bluemix services using the Bluemix Dashboard.
+  * [**Object Storage in Bluemix**](https://console.ng.bluemix.net/catalog/services/object-storage)  
     ![png](doc/source/images/cpd_bmx_objstorage_menu.png)  
     
-    1. Choose the region and create a Container unit
-    2. Upload the sample data file in Object storage Container
+    1. Choose an appropriate name for the service `Service Name` and choose `Free` Pricing Plan. Click on `Create`.
+        ![png](doc/source/images/cpd_bmx_addObjStorage.png)
+        <br/>
+    2. Click on Object Storage service instance on Bluemix Dashboard. Choose the `region` and create a Container unit using `Add a container` link.
+        ![png](doc/source/images/cpd_bmx_objstorage_createContainer.png)
+        <br/>
+    3. Upload the [sample data file](data/sample_sensordata2016_1s3dys.csv) in Object storage Container.
     
 
   * [**DB2 Warehouse on Cloud**](https://www.youtube.com/watch?v=CMFo4EtQ_ao)
@@ -110,23 +115,44 @@ Create the following Bluemix service by following the link to use the Bluemix UI
  
 ## 3. Create Node-RED App and inject IoT data
 
-Create the Node-RED starter App
+Create the Node-RED Starter application by following the link. Choose an appropriate name for the Node-RED application - `App name:`. Click on `Create`.
 
-![png](doc/source/images/cpd_bmx_nodered_menu.png)
-![png](doc/source/images/cpd_bmx_nodered_create.png)
+ [**Node-RED Starter**](https://console.bluemix.net/catalog/starters/node-red-starter)
 
-Launch node-red flow editor. You need to install following nodes before importing the flow:
+  ![png](doc/source/images/cpd_bmx_nodered_create.png)
 
-* node-red-contrib-objectstore
-* node-red-contrib-ibm-watson-iot  
+  * On the newly created Node-RED application page, Click on `Visit App URL` to launch the Node-RED editor once the   application is in `Running` state.
+  * On the `Welcome to your new Node-RED instance on IBM Bluemix` screen, Click on `Next`
+  * On the `Secure your Node-RED editor` screen, enter a username and password to secure the Node-RED editor and click on `Next`
+  * On the `Browse available IBM Bluemix nodes` screen, click on `Next`
+  * On the `Finish the install` screen, click on Finish
+  * Click on `Go to your Node-RED flow editor` 
+  * Install the following nodes before importing the flow:
+    - node-red-contrib-objectstore
+    - node-red-contrib-ibm-watson-iot  
+    To do this select ‘Manage Palette’ from the menu (top right), and then select the install tab  
+    in the palette. Search for new nodes name to install and click on install.
+    
+    ![png](doc/source/images/cpd_bmx_nodered_addNewNode.png)
+    <br/>
+    ![png](doc/source/images/cpd_bmx_nodered_addNewNode1.png)
+<br/>
+<br/>
+ 
+#### Import Node-RED flow by importing the [configuration .json](configuration/node-red.json)  
+The flow json for Node-RED can be found under `configuration` directory. 
+* Download the `configuration/node-red.json`
+* Open the file with a text editor and copy the contents to Clipboard
+* On the Node-RED flow editor, click the Menu and select Import -> Clipboard and paste the contents
 
-To do this select ‘Manage Palette’ from the menu (top right), and then select the install tab  
-in the palette. You can now search for new nodes to install and install the required ones.  
+ ![png](doc/source/images/cpd_bmx_import_nodered_flow.png)
+ <br/>
+ <br/>
+ 
+ #### Deploy the Node-RED flow by clicking on the `Deploy` button
 
-For more details, you can refer to:
-https://nodered.org/docs/getting-started/adding-nodes
-
-#### Create Node-RED flow by importing the [configuration .json](configuration/node-red.json)  
+![](doc/source/images/cpd_bmx_nodered_deploy.png)
+<br/>
 
 
 Node-red flow is designed as:  
