@@ -25,7 +25,7 @@ This journey can be logically split into 2 major modules or sections:
 
 ![png](doc/source/images/cpd_arch_flow.png)
 
-Data acquisition and storage of IoT Sensor data using Node Red flows and DB2  
+> Data acquisition and storage of IoT Sensor data using Node Red flows and DB2  
 
 For this journey the starting point is sensor data acquisition and storage of the same. Acquisition of sensor data is simulated in node-red as explained below  
 
@@ -35,7 +35,7 @@ For this journey the starting point is sensor data acquisition and storage of th
 4.	Import the [sample data](data/sample_sensordata2016_1s3dys.csv) into a DB2 table using the Node-RED flow  
 
 
-Data retrieval and statistical Change point detection using R - Jupyter notebooks  
+> Data retrieval and statistical Change point detection using R - Jupyter notebooks  
 
 
 5.	User configures the parameters in [.json dsx configuration file](configuration/cpd_dsx_config.json) that will be used in Data Science experience and updates credentials to read the configuration file  
