@@ -86,7 +86,6 @@ Sign up for IBM's [Data Science Experience](http://datascience.ibm.com/). By sig
 
 Create the following Bluemix services using the Bluemix Dashboard.
   * [**Object Storage in Bluemix**](https://console.ng.bluemix.net/catalog/services/object-storage)  
-    ![png](doc/source/images/cpd_bmx_objstorage_menu.png)  
     
     1. Choose an appropriate name for the service `Service Name` and choose `Free` Pricing Plan. Click on `Create`.
         ![png](doc/source/images/cpd_bmx_addObjectStorage.png)
