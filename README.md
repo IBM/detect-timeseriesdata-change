@@ -19,32 +19,29 @@ When you have completed this journey, you will understand how to
 * Execute R statistical functions to detect Change point in data
 * Output and save results in DSX Jupyter Notebook
 
-This journey can be split into 2 major modules or sections:
-1. Data acquisition and storage of IoT Sensor data using Node Red flows and DB2
-2. Data retrieval and statistical analysis using R - Jupyter notebooks to analyze and detect change points in the data
+This journey can be logically split into 2 major modules or sections:
+* Data acquisition and storage of IoT Sensor data using Node Red flows and DB2
+* Data retrieval and statistical analysis using R - Jupyter notebooks to analyze and detect change points in the data
 
 ![png](doc/source/images/cpd_arch_flow.png)
 
-# 1. Data acquisition and storage of IoT Sensor data using Node Red flows and DB2
-For this journey the starting point is sensor data acquisition and storage of the same. Acquisition of sensor data is simulated in node-red as explained below.
+Data acquisition and storage of IoT Sensor data using Node Red flows and DB2  
 
-1. Log into Bluemix and create a DB2 RDBMS warehouse service
-2. Create Node-RED flow App service to load IoT data into DB2 table by using the provided [.json configuration file](configuration/node-red.json)
-3. Import the [sample data](data/sample_sensordata2016_1s3dys.csv) into a DB2 table using the Node-RED flow
+For this journey the starting point is sensor data acquisition and storage of the same. Acquisition of sensor data is simulated in node-red as explained below  
 
-# 2. Data retrieval and statistical Change point detection using R - Jupyter notebooks
+1.	Log into Bluemix and create a DB2 RDBMS warehouse service  
+2.	Create Node-RED flow App service to load IoT data into DB2 table by using the provided [.json configuration file](configuration/node-red.json)  
+3.	Read IoT data from the sample csv file provided. The Node-RED flow can be changed to read from IoT devices directly  
+4.	Import the [sample data](data/sample_sensordata2016_1s3dys.csv) into a DB2 table using the Node-RED flow  
 
-1.	Log into Data Science (DSX for short) -> R Spark Jupyter Notebook and import the R flow from [.ipynb file](notebooks/watson_changepoint_detection_v2.ipynb)
-2.  Insert the credentials from the Data connections or modify the connection details to connect to source DB2
-3.	User configures the parameters in [.json dsx configuration file](configuration/cpd_dsx_config.json) and updates credentials to read the configuration file
-4.  User then updates credentials to read relevant Sensor data subset from the DB2 table
-5.	Data from the cloud database will be read by R Spark dataframe in DSX notebook
-6.	The user will further extract the 2 series of datasets to be compared
-7.	R notebook will use open R libraries and Custom built function components to get the statistics computed
-8.	User will generate visual comparison charts to get visual insights on changes in behavior of the sensor values
-9.	These Statistical metrics will be compared and the changes analyzed using the Custom functions written in R
-10.	Based on the threshold deviation specified by the user, Custom R functions will then output if there is a Change point occurrence detected
-11.	Due to the configurable and reusable nature of the components, innumerable combination of data sets can be quickly compared for change point occurrence
+
+Data retrieval and statistical Change point detection using R - Jupyter notebooks  
+
+
+5.	User configures the parameters in [.json dsx configuration file](configuration/cpd_dsx_config.json) that will be used in Data Science experience and updates credentials to read the configuration file  
+6.	In R notebook flow,  user then updates credentials to read relevant Sensor data subset from the DB2 table. Data from the cloud database will be read by R Spark dataframe in DSX notebook. The user will further extract the 2 series of datasets to be compared. R notebook will use open R libraries and Custom built function components to get the statistics computed.User will generate visual comparison charts to get visual insights on changes in behavior of the sensor values. These Statistical metrics will be compared and the changes analyzed using the Custom functions written in R  
+7.	In Data science experience R runs on Spark engine to ensure scalability and performance  
+8.	Object storage is used to store the configuration file where DSX reads the parameters from. The results can also be stored in Object storage if needed  
 
 Developer can reuse all components that support the above steps like
 1.	Reading specific Time series data points from database like Time stamp, Sensor ID, Sensor values
