@@ -21,10 +21,11 @@ When you have completed this journey, you will understand how to
 
 ![png](doc/source/images/cpd_arch_flow.png)
 
-This journey can be logically split into 2 major modules or sections:
-* Data acquisition and storage of IoT Sensor data using Node Red flows and DB2 (Steps 1-4 below)
-* Data retrieval and statistical analysis using R - Jupyter notebooks to analyze and detect change points in the data (Steps 5-8 below)
+This journey can be logically split into 2 major parts:
+* Data acquisition and storage of IoT Sensor data using Node Red flows and DB2: The Steps 1 to 4 below cover the details of this part of the journey. 
+* Data retrieval and statistical analysis using R - Jupyter notebooks to analyze and detect change points in the data:  The Steps 5 to 8 below cover the details of this part of the journey. 
 
+#### Steps:
 1.	Log into Bluemix and create Bluemix services  
 2.	Create Node-RED Application to load IoT data into DB2 table by using the provided [.json configuration file](configuration/node-red.json)  
 3.	Read IoT data from the sample csv file provided. The Node-RED flow can be changed to read from IoT devices directly  
