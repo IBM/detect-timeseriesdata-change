@@ -265,10 +265,9 @@ The notebook outputs the results in the Notebook which can be copied to clipboar
 ![](doc/source/images/cpd_notebook_results.png)
 
 
-The graphs gives a visual indication of how the Sensor values behave during the 2 time periods  
+The graphs give a visual indication of how the Sensor values behave during the 2 time periods  
 
-Statistics on these 2 time periods like averages, standard deviations, quartiles are computed and deviations computed for each of them
-Then a overall deviation is computed and compared against the threshold set earlier in the DSX configuration file  
+Statistics on these 2 time periods like averages, standard deviations, quartiles are computed and deviations computed for each of them. Then a overall deviation is computed and compared against the threshold set earlier in the DSX configuration file  
 
 Based on the threshold deviation specified by the user, if the overall computed deviation exceeds the threshold configured, custom R functions will output if there is a Change point occurrence detected  
 
