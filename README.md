@@ -109,13 +109,13 @@ Create the following Bluemix services using the Bluemix Dashboard.
     1. Once service is created, click on `DB2 Warehouse on Cloud` service instance on Bluemix Dashboard. Click `Open` to launch the Dashboard.
     2. Click on `Explore` from the panel, choose schema and then create a `New Table`.
        ![png](doc/source/images/cpd_bmx_db2ws_createTable.png)
-    3. Create a new database table `CHNAGEPOINTIOT` with following schema:  
+    3. Create a new database table `CHANGEPOINTIOT` with following schema:  
           {  
-                       SENSORID VARCHAR(20)  
-                       TIMESTAMP VARCHAR(100)  
-                       SENSORVALUE DECIMAL(8,5)  
-                       SENSORUNITS VARCHAR(100) 
-           }
+                SENSORID VARCHAR(20)  
+                TIMESTAMP VARCHAR(100)  
+                SENSORVALUE DECIMAL(8,5)  
+                SENSORUNITS VARCHAR(100)   
+          }
 
 
   * [**Internet of Things Platform**](https://console.bluemix.net/catalog/services/internet-of-things-platform)
@@ -172,7 +172,7 @@ The flow json for Node-RED can be found under `configuration` directory.
 
 3.	IBM IoT node: Configure IBM IoT node to receive events from Watson IoT Platform using the API keys generated in Create Bluemix Services section. To setup IBM IoT Node in node-red refer to step 5 in https://developer.ibm.com/recipes/tutorials/getting-started-with-watson-iot-platform-using-node-red/
 
-4.	dash DB node (CHANGEPOINTIOT): Use credentials of DB2 Warehouse on Cloud service. Service credentials are available in Bluemix service instance. Provide database table name `CHANGEPOINTIOT` in which sensor data will get populated.
+4.	dashDB node (CHANGEPOINTIOT): Use credentials of DB2 Warehouse on Cloud service. Service credentials are available in Bluemix service instance. Provide database table name `CHANGEPOINTIOT` in which sensor data will get populated.
 
  #### Deploy the Node-RED flow by clicking on the `Deploy` button
 
@@ -180,15 +180,16 @@ The flow json for Node-RED can be found under `configuration` directory.
 <br/>
 
 Node-red flow is designed as:  
- 1.	The csv file with sample sensor data is uploaded in object storage
- 2.	Prepare a csv string [from the sample data file](data/sample_sensordata2016_1s3dys.csv) and give this string, as an input  to csv node
- 3.	csv node will act as a device simulator and it will trigger an event of temperature sensor for each row of data
- 4.	The events sent by temperature sensor will be received by IBM IoT Platform
- 5.	This data will be prepared and then stored in the database
- 6.	Data from DB can be used in R Jupyter notebook for analytics
+ 1.	The csv file with sample sensor data is uploaded in object storage.
+ 2.	Prepare a csv string from the sample data file and give this string, as an input  to csv node.
+ 3.	csv node will act as a device simulator and it will trigger an event of temperature sensor for each row of data.
+ 4.	The events sent by temperature sensor will be received by IBM IoT Platform.
+ 5.	This data will be prepared and then stored in the database.
+ 6.	Data from DB can be used in R Jupyter notebook for analytics.
+  
   
  #### Inject the data in Node-RED Flow
-  Inject the data, data will get stored to DB2.
+  In Node-RED Flow, click on the input of `inject` node. It will trigger the execution of the node-red flow and on successful execution, data will get stored to DB2 table `CHANGEPOINTIOT`.
 
 ## 4. Create the R Spark Jupyter notebook
 
