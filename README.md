@@ -29,8 +29,8 @@ Data acquisition and storage of IoT Sensor data using Node Red flows and DB2
 
 For this journey the starting point is sensor data acquisition and storage of the same. Acquisition of sensor data is simulated in node-red as explained below  
 
-1.	Log into Bluemix and create a DB2 warehouse on the cloud service  
-2.	Create Node-RED flow App service to load IoT data into DB2 table by using the provided [.json configuration file](configuration/node-red.json)  
+1.	Log into Bluemix and create Bluemix services  
+2.	Create Node-RED Application to load IoT data into DB2 table by using the provided [.json configuration file](configuration/node-red.json)  
 3.	Read IoT data from the sample csv file provided. The Node-RED flow can be changed to read from IoT devices directly  
 4.	Import the [sample data](data/sample_sensordata2016_1s3dys.csv) into a DB2 table using the Node-RED flow  
 
