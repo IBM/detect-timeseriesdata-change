@@ -139,10 +139,13 @@ Create the Node-RED Starter application by following the link. Choose an appropr
   * On the `Finish the install` screen, click on Finish
   * Click on `Go to your Node-RED flow editor` 
   * Install the following nodes before importing the flow. To do this select ‘Manage Palette’ from the menu (top right), and then select the install tab in the palette. Search for new nodes name to install and click on install.
-    - node-red-contrib-objectstore
+  
+    - `node-red-contrib-objectstore`
+    
       ![png](doc/source/images/cpd_bmx_nodered_addNewNode.png)
-    <br/>
-    - node-red-contrib-ibm-watson-iot
+      <br/>
+    - `node-red-contrib-ibm-watson-iot`
+    
       ![png](doc/source/images/cpd_bmx_nodered_addNewNode1.png)
 
 #### Import Node-RED flow by importing the [configuration .json](configuration/node-red.json)  
