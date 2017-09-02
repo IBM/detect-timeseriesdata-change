@@ -70,12 +70,11 @@ described in detail below.
 
 1. [Sign up for the Data Science Experience](#1-sign-up-for-the-data-science-experience)
 1. [Create Bluemix services](#2-create-bluemix-services)
-1. [Create Node-RED App and inject IoT data](#3-create-nodered-services)
-1. [Create the notebook](#4-create-the-notebook)
-1. [Add the data and configuraton file](#5-add-the-data-config-file)
-1. [Update the notebook with service credentials](#6-update-the-notebook-service-credential)
-1. [Run the notebook](#7-run-the-notebook)
-1. [Download the results](#8-download-the-results)
+1. [Create Node-RED App and inject IoT data](#3-create-node-red-app-and-inject-iot-data)
+1. [Create the notebook](#4-create-the-r-spark-jupyter-notebook)
+1. [Add the data and configuraton file](#5-add-the-configuration-and-data-access-details)
+1. [Run the notebook](#6-run-the-notebook)
+1. [Download the results](#7-view-the-results)
 
 ## 1. Sign up for the Data Science Experience
 
