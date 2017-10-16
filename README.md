@@ -61,7 +61,7 @@ Developer can reuse all components that support the above steps like
 
 # Watch the Video
 
-[![](http://img.youtube.com/vi/SKRYaz7nMEs/0.jpg)](https://youtu.be/SKRYaz7nMEs)
+[![](http://img.youtube.com/vi/SKRYaz7nMEs/0.jpg)](https://youtu.be/DFY7wcwRZAE)
 
 # Steps
 
