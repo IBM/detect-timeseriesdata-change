@@ -1,15 +1,17 @@
+![png](doc/source/images/cpd_arch_flow.png)
 
 # Change Point Detection in Time Series Sensor data
 
-This developer journey is intended for any Developer who wants to experiment, learn, enhance and implement a new method for Statistically detecting Change point in Sensor data. Sensors mounted on devices like IoT devices, Automated manufacturing like Robot arms, Process monitoring and Control equipment etc., collect and transmit data on a continuous basis which is Time stamped. 
-This journey takes you through end to end flow of steps in collating statistics on such Time series data and identify if a Change point has occurred. Core building blocks would include computing Statistical parameters from the Time series data, which compares a Previous dataset of a certain Time range in the past with the Current Series in a recent Time range. Statistical comparison between these two results in detection of any change points. R statistical software is used in this Journey with sample Sensor data loaded into the Data Science experience cloud.
+## Overview and Goal
+This developer pattern is intended for any Developer who wants to experiment, learn, enhance and implement a new method for Statistically detecting Change point in Sensor data. Sensors mounted on devices like IoT devices, Automated manufacturing like Robot arms, Process monitoring and Control equipment etc., collect and transmit data on a continuous basis which is Time stamped. 
+This pattern takes you through end to end flow of steps in collating statistics on such Time series data and identify if a Change point has occurred. Core building blocks would include computing Statistical parameters from the Time series data, which compares a Previous dataset of a certain Time range in the past with the Current Series in a recent Time range. Statistical comparison between these two results in detection of any change points. R statistical software is used in this pattern with sample Sensor data loaded into the Data Science experience cloud.
 All the intermediary steps are modularized and all code open sourced to enable developers to use / modify the modules / sub-modules as they see fit for their specific application.
 
-This journey utilizes IoT sensor data and its primary goal is to statistically identify the change point in this sensor data rather than the acquisition and storage of the data itself. For sake of completeness of the flow, a simulation of the IoT data acquisition is included as a first step.
+This pattern utilizes IoT sensor data and its primary goal is to statistically identify the change point in this sensor data rather than the acquisition and storage of the data itself. For sake of completeness of the flow, a simulation of the IoT data acquisition is included as a first step.
 
-A detailed journey of acquisition and storage of IoT sensor data is already covered extensively elsewhere. References to the details of these journeys are also given.
+A detailed pattern of acquisition and storage of IoT sensor data is already covered extensively elsewhere. References to the details of these patterns are also given.
 
-When you have completed this journey, you will understand how to
+When you have completed this pattern, you will understand how to
 
 * Write data from a IoT source to a database
 * Create and Run a Jupyter Notebook in DSX
@@ -19,14 +21,17 @@ When you have completed this journey, you will understand how to
 * Execute R statistical functions to detect Change point in data
 * Output and save results in DSX Jupyter Notebook
 
-![png](doc/source/images/cpd_arch_flow.png)
+This pattern can be logically split into 2 major parts:
+* Data acquisition and storage of IoT Sensor data using Node Red flows and DB2: The Steps 1 to 4 below cover the details of this part of the pattern. 
+* Data retrieval and statistical analysis using R - Jupyter notebooks to analyze and detect change points in the data:  The Steps 5 to 8 below cover the details of this part of the pattern. 
 
-This journey can be logically split into 2 major parts:
-* Data acquisition and storage of IoT Sensor data using Node Red flows and DB2: The Steps 1 to 4 below cover the details of this part of the journey. 
-* Data retrieval and statistical analysis using R - Jupyter notebooks to analyze and detect change points in the data:  The Steps 5 to 8 below cover the details of this part of the journey. 
+## Prerequisites
+You will need the following accounts and tools:
+* [IBM Cloud account](https://console.ng.bluemix.net/registration/)
+* [Bluemix CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/index.html#getting-started)
 
 #### Steps:
-1.	Log into Bluemix and create Bluemix services  
+1.	Log into IBM Cloud and create IBM Cloud services  
 2.	Create Node-RED Application to load IoT data into DB2 table by using the provided [.json configuration file](configuration/node-red.json)  
 3.	Read IoT data from the sample csv file provided. The Node-RED flow can be changed to read from IoT devices directly  
 4.	Import the [sample data](data/sample_sensordata2016_1s3dys.csv) into a DB2 table using the Node-RED flow  
@@ -51,7 +56,7 @@ Developer can reuse all components that support the above steps like
 
 * [DB2 Warehouse on cloud](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud): IBM Db2 Warehouse on Cloud is a fully-managed, enterprise-class, cloud data warehouse service. Powered by IBM BLU Acceleration.
 
-* [Bluemix Object Storage](https://console.ng.bluemix.net/catalog/services/object-storage/?cm_sp=dw-bluemix-_-code-_-devcenter): A Bluemix service that provides an unstructured cloud data store to build and deliver cost effective apps and services with high reliability and fast speed to market.
+* [Bluemix Object Storage](https://console.ng.bluemix.net/catalog/services/object-storage/?cm_sp=dw-bluemix-_-code-_-devcenter): An IBM Cloud service that provides an unstructured cloud data store to build and deliver cost effective apps and services with high reliability and fast speed to market.
 
 * [Internet of Things Platform](https://console.bluemix.net/catalog/services/internet-of-things-platform): This service is the hub for IBM Watson IoT and lets you communicate with and consume data from connected devices and gateways. Use the built-in web console dashboards to monitor your IoT data and analyze it in real time.
 
@@ -65,11 +70,11 @@ Developer can reuse all components that support the above steps like
 
 # Steps
 
-Follow these steps to setup and run this developer journey. The steps are
+Follow these steps to setup and run this developer pattern. The steps are
 described in detail below.
 
 1. [Sign up for the Data Science Experience](#1-sign-up-for-the-data-science-experience)
-1. [Create Bluemix services](#2-create-bluemix-services)
+1. [Create IBM Cloud services](#2-create-bluemix-services)
 1. [Create Node-RED App and inject IoT data](#3-create-node-red-app-and-inject-iot-data)
 1. [Create the notebook](#4-create-the-r-spark-jupyter-notebook)
 1. [Add the data and configuraton file](#5-add-the-configuration-and-data-access-details)
@@ -78,17 +83,17 @@ described in detail below.
 
 ## 1. Sign up for the Data Science Experience
 
-Sign up for IBM's [Data Science Experience](http://datascience.ibm.com/). By signing up for the Data Science Experience, two services: ``DSX-Spark`` and ``DSX-ObjectStore`` will be created in your Bluemix account.
+Sign up for IBM's [Data Science Experience](http://datascience.ibm.com/). By signing up for the Data Science Experience, two services: ``DSX-Spark`` and ``DSX-ObjectStore`` will be created in your IBM Cloud account.
 
-## 2. Create Bluemix services
+## 2. Create IBM Cloud services
 
-Create the Bluemix services by following the links below.
-  * [**Object Storage in Bluemix**](https://console.ng.bluemix.net/catalog/services/object-storage)  
+Create the IBM Cloud services by following the links below.
+  * [**Object Storage in IBM Cloud**](https://console.ng.bluemix.net/catalog/services/object-storage)  
     
     1. Choose an appropriate name for the service `Service Name` and choose `Free` Pricing Plan. Click on `Create`.
         ![png](doc/source/images/cpd_bmx_addObjectStorage.png)
         <br/>
-    2. Click on Object Storage service instance on Bluemix Dashboard. Choose the `region` and create a Container unit using `Add a container` link.
+    2. Click on Object Storage service instance on IBM Cloud Dashboard. Choose the `region` and create a Container unit using `Add a container` link.
         ![png](doc/source/images/cpd_bmx_objstorage_createContainer.png)
         <br/>
     3. Upload the [sample data file](data/sample_sensordata2016_1s3dys.csv) in Object storage Container.
@@ -98,7 +103,7 @@ Create the Bluemix services by following the links below.
 
     ![](doc/source/images/cpd_db2whs_onbluemix.png)
 
-    1. Once service is created, click on `DB2 Warehouse on Cloud` service instance on Bluemix Dashboard. Click `Open` to launch the Dashboard.
+    1. Once service is created, click on `DB2 Warehouse on Cloud` service instance on IBM Cloud Dashboard. Click `Open` to launch the Dashboard.
     2. Click on `Explore` from the panel, choose schema and then create a `New Table`.
        ![png](doc/source/images/cpd_bmx_db2ws_createTable.png)
     3. Create a new database table `CHANGEPOINTIOT` with following schema:  
@@ -114,7 +119,7 @@ Create the Bluemix services by following the links below.
 
     ![](doc/source/images/cpd_bmx_addIOT.png)
 
-    1. Once service is created, click on `Internet of Things Platform` service instance on Bluemix Dashboard. Launch the Watson IoT Platform Dashboard.    
+    1. Once service is created, click on `Internet of Things Platform` service instance on IBM Cloud Dashboard. Launch the Watson IoT Platform Dashboard.    
     2. Register a device on Watson IoT Platform, refer to step 3 and step 4 in https://developer.ibm.com/recipes/tutorials/how-to-register-devices-in-ibm-iot-foundation/  
     3. Generate API Keys to establish a connection to IoT Platform from your application. Refer step 5 in https://developer.ibm.com/recipes/tutorials/how-to-register-devices-in-ibm-iot-foundation/ to generate API Keys. Make a note of the generated keys, it will be used later.
 
@@ -134,9 +139,9 @@ Create the Node-RED Starter application by following the link. Choose an appropr
   ![png](doc/source/images/cpd_bmx_nodered_create.png)
 
   * On the newly created Node-RED application page, Click on `Visit App URL` to launch the Node-RED editor once the   application is in `Running` state.
-  * On the `Welcome to your new Node-RED instance on IBM Bluemix` screen, Click on `Next`
+  * On the `Welcome to your new Node-RED instance on IBM Cloud` screen, Click on `Next`
   * On the `Secure your Node-RED editor` screen, enter a username and password to secure the Node-RED editor and click on `Next`
-  * On the `Browse available IBM Bluemix nodes` screen, click on `Next`
+  * On the `Browse available IBM Cloud nodes` screen, click on `Next`
   * On the `Finish the install` screen, click on Finish
   * Click on `Go to your Node-RED flow editor` 
   * Install the following nodes before importing the flow. To do this select ‘Manage Palette’ from the menu (top right), and then select the install tab in the palette. Search for new nodes name to install and click on install.
@@ -158,13 +163,13 @@ The flow json for Node-RED can be found under `configuration` directory.
   ![png](doc/source/images/cpd_bmx_import_nodered_flow.png)
  
 #### Adjustments to the node properties in Node-RED Flow 
-1.	Object Storage node (getFileData_in_buffer): Provide your Object Storage service credentials. Service credentials are available in Bluemix service instance. Configure node in buffer mode to read the file from your object storage service. Ensure the sample data is loaded into Object storage as explained in Create Bluemix Services section above.
+1.	Object Storage node (getFileData_in_buffer): Provide your Object Storage service credentials. Service credentials are available in IBM Cloud service instance. Configure node in buffer mode to read the file from your object storage service. Ensure the sample data is loaded into Object storage as explained in Create IBM Cloud Services section above.
 
 2.	Watson-IoT node (TemperatureSensor): Configure this with a registered device on Watson IoT Platform. To configure Watson IoT node in node-red, refer to : https://developer.ibm.com/recipes/tutorials/simulating-a-device-and-publishing-034messages034-to-ibm-iot-platform-from-a-nodered-034watson-iot034-platform-node/
 
-3.	IBM IoT node: Configure IBM IoT node to receive events from Watson IoT Platform using the API keys generated in Create Bluemix Services section. To setup IBM IoT Node in node-red refer to step 5 in https://developer.ibm.com/recipes/tutorials/getting-started-with-watson-iot-platform-using-node-red/
+3.	IBM IoT node: Configure IBM IoT node to receive events from Watson IoT Platform using the API keys generated in Create IBM Cloud Services section. To setup IBM IoT Node in node-red refer to step 5 in https://developer.ibm.com/recipes/tutorials/getting-started-with-watson-iot-platform-using-node-red/
 
-4.	dashDB node (CHANGEPOINTIOT): Use credentials of DB2 Warehouse on Cloud service. Service credentials are available in Bluemix service instance. Provide database table name `CHANGEPOINTIOT` in which sensor data will get populated.
+4.	dashDB node (CHANGEPOINTIOT): Use credentials of DB2 Warehouse on Cloud service. Service credentials are available in IBM Cloud service instance. Provide database table name `CHANGEPOINTIOT` in which sensor data will get populated.
 
  #### Deploy the Node-RED flow by clicking on the `Deploy` button
 
@@ -299,6 +304,43 @@ Based on the threshold deviation specified by the user, if the overall computed 
 # Troubleshooting
 
 [See DEBUGGING.md](DEBUGGING.md)
+
+## Useful links
+
+* [IBM Cloud](https://bluemix.net/)  
+* [IBM Cloud Documentation](https://www.ng.bluemix.net/docs/)  
+* [IBM Cloud Developers Community](http://developer.ibm.com/bluemix)  
+* [IBM Watson Internet of Things](http://www.ibm.com/internet-of-things/)  
+* [IBM Watson IoT Platform](http://www.ibm.com/internet-of-things/iot-solutions/watson-iot-platform/)   
+* [IBM Watson IoT Platform Developers Community](https://developer.ibm.com/iotplatform/)
+* [Simulate IoT Device](https://github.com/IBM/manage-control-device-node-red)
+* [Node-RED](https://nodered.org/)
+
+
+## Privacy notice
+
+This web application includes code to track deployments to [IBM Cloud](https://www.bluemix.net/) and other Cloud Foundry platforms. The following information is sent to a [Deployment Tracker](https://github.com/IBM/metrics-collector-service) service on each deployment:
+
+* Node.js package version
+* Node.js repository URL
+* Cloudant database
+* Watson visual recognition service
+* Application Name (`application_name`)
+* Application GUID (`application_id`)
+* Application instance index number (`instance_index`)
+* Space ID (`space_id`)
+* Application Version (`application_version`)
+* Application URIs (`application_uris`)
+* Node-RED package version
+* Labels of bound services
+* Number of instances for each bound service and associated plan information
+* Metadata in the repository.yaml file
+
+This data is collected from the `package.json` and `repository.yaml` file in the sample application and the `VCAP_APPLICATION` and `VCAP_SERVICES` environment variables in IBM Cloud and other Cloud Foundry platforms. This data is used by IBM to track metrics around deployments of sample applications to IBM Cloud to measure the usefulness of our examples, so that we can continuously improve the content we offer to you. Only deployments of sample applications that include code to ping the Deployment Tracker service will be tracked.
+
+## Disabling deployment tracking
+
+Deployment tracking can be disabled by removing the `require("metrics-tracker-client").track();` line from the 'index.js' file.
 
 # License
 
