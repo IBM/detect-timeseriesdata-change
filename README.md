@@ -25,6 +25,8 @@ This pattern can be logically split into 2 major parts:
 * Data acquisition and storage of IoT Sensor data using Node Red flows and DB2: The Steps 1 to 4 below cover the details of this part of the pattern. 
 * Data retrieval and statistical analysis using R - Jupyter notebooks to analyze and detect change points in the data:  The Steps 5 to 8 below cover the details of this part of the pattern. 
 
+Click here to view the [IBM Pattern](https://developer.ibm.com/code/patterns/detect-change-points-in-iot-sensor-data/) for this project.
+
 ## Prerequisites
 You will need the following accounts and tools:
 * [IBM Cloud account](https://console.ng.bluemix.net/registration/)
