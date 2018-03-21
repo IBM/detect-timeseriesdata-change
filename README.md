@@ -19,7 +19,7 @@ When you have completed this pattern, you will understand how to
 * Read data from database in R notebook and statistically analyze the data
 * Generate results in the form of visualisation plots
 * Execute R statistical functions to detect Change point in data
-* Output and save results in Watson Studio Jupyter Notebook
+* Output and save results in Jupyter Notebook
 
 This pattern can be logically split into 2 major parts:
 * Data acquisition and storage of IoT Sensor data using Node Red flows and DB2: The Steps 1 to 4 below cover the details of this part of the pattern. 
