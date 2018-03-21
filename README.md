@@ -85,7 +85,7 @@ described in detail below.
 
 ## 1. Sign up for the Watson Studio
 
-Sign up for IBM's [Watson Studio](http://datascience.ibm.com/). By signing up for the Watson Studio, two services: ``Watson Studio-Spark`` and ``Watson Studio-ObjectStore`` will be created in your IBM Cloud account.
+Sign up for IBM's [Watson Studio](http://datascience.ibm.com/). By signing up for the Watson Studio, two services: ``Apache Spark`` and ``Object Storage`` will be created in your IBM Cloud account.
 
 ## 2. Create IBM Cloud services
 
@@ -210,7 +210,7 @@ Click on `Add notebooks` (upper right) to create a notebook.
 
 #### Fix-up configuration parameter .json file name and values
 
-Once the files have been uploaded into ``Watson Studio-ObjectStore`` you need to update the variables that refer to the .json configuration files in the R - Jupyter Notebook.
+Once the files have been uploaded into ``Object Storage`` you need to update the variables that refer to the .json configuration files in the R - Jupyter Notebook.
 
 In the notebook, update the Watson Studio configuration .json file name in section 2.1.1 
 ![png](doc/source/images/cpd_dsxconfig_setfilename.png)
