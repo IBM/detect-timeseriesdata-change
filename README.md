@@ -14,12 +14,12 @@ A detailed pattern of acquisition and storage of IoT sensor data is already cove
 When you have completed this pattern, you will understand how to
 
 * Write data from a IoT source to a database
-* Create and Run a Jupyter Notebook in DSX
+* Create and Run a Jupyter Notebook in Watson Studio
 * Run R statistical software code in Jupyter Notebook
 * Read data from database in R notebook and statistically analyze the data
 * Generate results in the form of visualisation plots
 * Execute R statistical functions to detect Change point in data
-* Output and save results in DSX Jupyter Notebook
+* Output and save results in Watson Studio Jupyter Notebook
 
 This pattern can be logically split into 2 major parts:
 * Data acquisition and storage of IoT Sensor data using Node Red flows and DB2: The Steps 1 to 4 below cover the details of this part of the pattern. 
@@ -38,9 +38,9 @@ You will need the following accounts and tools:
 3.	Read IoT data from the sample csv file provided. The Node-RED flow can be changed to read from IoT devices directly  
 4.	Import the [sample data](data/sample_sensordata2016_1s3dys.csv) into a DB2 table using the Node-RED flow  
 5.	User configures the parameters in [.json dsx configuration file](configuration/cpd_dsx_config.json) that will be used in Data Science experience and updates credentials to read the configuration file  
-6.	In R notebook flow,  user then updates credentials to read relevant Sensor data subset from the DB2 table. Data from the cloud database will be read by R Spark dataframe in DSX notebook. The user will further extract the 2 series of datasets to be compared. R notebook will use open R libraries and Custom built function components to get the statistics computed.User will generate visual comparison charts to get visual insights on changes in behavior of the sensor values. These Statistical metrics will be compared and the changes analyzed using the Custom functions written in R  
+6.	In R notebook flow,  user then updates credentials to read relevant Sensor data subset from the DB2 table. Data from the cloud database will be read by R Spark dataframe in Watson Studio notebook. The user will further extract the 2 series of datasets to be compared. R notebook will use open R libraries and Custom built function components to get the statistics computed.User will generate visual comparison charts to get visual insights on changes in behavior of the sensor values. These Statistical metrics will be compared and the changes analyzed using the Custom functions written in R  
 7.	In Data science experience R runs on Spark engine to ensure scalability and performance  
-8.	Object storage is used to store the configuration file where DSX reads the parameters from. The results can also be stored in Object storage if needed  
+8.	Object storage is used to store the configuration file where Watson Studio reads the parameters from. The results can also be stored in Object storage if needed  
 
 Developer can reuse all components that support the above steps like
 *	Reading specific Time series data points from database like Time stamp, Sensor ID, Sensor values
@@ -54,7 +54,7 @@ Developer can reuse all components that support the above steps like
 
 * [IBM Node-RED Cloud Foundry App](https://console.bluemix.net/catalog/starters/node-red-starter): Develop, deploy, and scale server-side JavaScript® apps with ease. The IBM SDK for Node.js™ provides enhanced performance, security, and serviceability.
 
-* [IBM Data Science Experience](https://www.ibm.com/bs-en/marketplace/data-science-experience): Analyze data using RStudio, Jupyter, and Python in a configured, collaborative environment that includes IBM value-adds, such as managed Spark.
+* [IBM Watson Studio](https://www.ibm.com/bs-en/marketplace/data-science-experience): Analyze data using RStudio, Jupyter, and Python in a configured, collaborative environment that includes IBM value-adds, such as managed Spark.
 
 * [DB2 Warehouse on cloud](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud): IBM Db2 Warehouse on Cloud is a fully-managed, enterprise-class, cloud data warehouse service. Powered by IBM BLU Acceleration.
 
@@ -75,7 +75,7 @@ Developer can reuse all components that support the above steps like
 Follow these steps to setup and run this developer pattern. The steps are
 described in detail below.
 
-1. [Sign up for the Data Science Experience](#1-sign-up-for-the-data-science-experience)
+1. [Sign up for the Watson Studio](#1-sign-up-for-the-data-science-experience)
 1. [Create IBM Cloud services](#2-create-bluemix-services)
 1. [Create Node-RED App and inject IoT data](#3-create-node-red-app-and-inject-iot-data)
 1. [Create the notebook](#4-create-the-r-spark-jupyter-notebook)
@@ -83,9 +83,9 @@ described in detail below.
 1. [Run the notebook](#6-run-the-notebook)
 1. [Download the results](#7-view-the-results)
 
-## 1. Sign up for the Data Science Experience
+## 1. Sign up for the Watson Studio
 
-Sign up for IBM's [Data Science Experience](http://datascience.ibm.com/). By signing up for the Data Science Experience, two services: ``DSX-Spark`` and ``DSX-ObjectStore`` will be created in your IBM Cloud account.
+Sign up for IBM's [Watson Studio](http://datascience.ibm.com/). By signing up for the Watson Studio, two services: ``Watson Studio-Spark`` and ``Watson Studio-ObjectStore`` will be created in your IBM Cloud account.
 
 ## 2. Create IBM Cloud services
 
@@ -126,7 +126,7 @@ Create the IBM Cloud services by following the links below.
     3. Generate API Keys to establish a connection to IoT Platform from your application. Refer step 5 in https://developer.ibm.com/recipes/tutorials/how-to-register-devices-in-ibm-iot-foundation/ to generate API Keys. Make a note of the generated keys, it will be used later.
 
 
-  * [**Data Science Experience**](https://console.bluemix.net/catalog/services/data-science-experience)
+  * [**Watson Studio**](https://console.bluemix.net/catalog/services/data-science-experience)
 
   ![](doc/source/images/cpd_dsx_menu.png.png)
   ![](doc/source/images/cpd_dsx_createservice.png)
@@ -203,19 +203,19 @@ Click on `Add notebooks` (upper right) to create a notebook.
 * Click the `Create Notebook` button.
 
 ![](doc/source/images/cpd_create_rsparknotebook.png)  
-* Upload the sample .json DSX configuration file to Object storage from URL:  
+* Upload the sample .json Watson Studio configuration file to Object storage from URL:  
   https://github.com/IBM/detect-timeseriesdata-change/blob/master/configuration/cpd_dsx_config.json
 
 ## 5. Add the configuration and data access details
 
 #### Fix-up configuration parameter .json file name and values
 
-Once the files have been uploaded into ``DSX-ObjectStore`` you need to update the variables that refer to the .json configuration files in the R - Jupyter Notebook.
+Once the files have been uploaded into ``Watson Studio-ObjectStore`` you need to update the variables that refer to the .json configuration files in the R - Jupyter Notebook.
 
-In the notebook, update the DSX configuration .json file name in section 2.1.1 
+In the notebook, update the Watson Studio configuration .json file name in section 2.1.1 
 ![png](doc/source/images/cpd_dsxconfig_setfilename.png)
 
-Edit the [DSX configuration .json file](configuration/cpd_dsx_config.json)  
+Edit the [Watson Studio configuration .json file](configuration/cpd_dsx_config.json)  
 Update the `paramvalue` ONLY to suit your requirements and save the .json file  
 Retain the rest of the format and composition of the .json file  
 
@@ -237,7 +237,7 @@ The descriptions of the parameters that can be configured are as below.
 12. thresholdpercent: Set the threshold percentage of change if detected
 
 
-* In section 2.1.2 of DSX notebook, Insert (replace) your own Object storage 
+* In section 2.1.2 of Watson Studio notebook, Insert (replace) your own Object storage 
 file credentials to read the .json configuration file
 * Also replace the function name in the block that Read json configuration file
 in section 2.1.3
@@ -298,7 +298,7 @@ The notebook outputs the results in the Notebook which can be copied to clipboar
 
 The graphs give a visual indication of how the Sensor values behave during the 2 time periods  
 
-Statistics on these 2 time periods like averages, standard deviations, quartiles are computed and deviations computed for each of them. Then a overall deviation is computed and compared against the threshold set earlier in the DSX configuration file  
+Statistics on these 2 time periods like averages, standard deviations, quartiles are computed and deviations computed for each of them. Then a overall deviation is computed and compared against the threshold set earlier in the Watson Studio configuration file  
 
 Based on the threshold deviation specified by the user, if the overall computed deviation exceeds the threshold configured, custom R functions will output if there is a Change point occurrence detected  
 
