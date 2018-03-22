@@ -206,7 +206,6 @@ Click on `Add notebooks` (upper right) to create a notebook.
   https://github.com/IBM/detect-timeseriesdata-change/blob/master/notebooks/watson_changepoint_detection.ipynb
 * Click the `Create Notebook` button.
 
-![](doc/source/images/cpd_create_rsparknotebook.png)  
 * Upload the sample .json Watson Studio configuration file to Object storage from URL:  
   https://github.com/IBM/detect-timeseriesdata-change/blob/master/configuration/cpd_dsx_config.json
 
