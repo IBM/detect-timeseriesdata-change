@@ -198,14 +198,12 @@ In Node-RED Flow, click on the input of `inject` node. It will trigger the execu
 
 Use the menu on the left to select `My Projects` and then `Default Project`.
 Click on `Add notebooks` (upper right) to create a notebook.
-
 * Select the `From URL` tab.
 * Enter a name for the notebook.
 * Optionally, enter a description for the notebook.
 * Enter this Notebook URL:  
   https://github.com/IBM/detect-timeseriesdata-change/blob/master/notebooks/watson_changepoint_detection.ipynb
 * Click the `Create Notebook` button.
-
 * Upload the sample .json Watson Studio configuration file to Object storage from URL:  
   https://github.com/IBM/detect-timeseriesdata-change/blob/master/configuration/cpd_dsx_config.json
 
