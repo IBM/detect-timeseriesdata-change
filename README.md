@@ -1,17 +1,20 @@
-![png](doc/source/images/cpd_arch_flow.png)
-
 # Change Point Detection in Time Series Sensor data
 
 ## Overview and Goal
-This developer pattern is intended for any Developer who wants to experiment, learn, enhance and implement a new method for Statistically detecting Change point in Sensor data. Sensors mounted on devices like IoT devices, Automated manufacturing like Robot arms, Process monitoring and Control equipment etc., collect and transmit data on a continuous basis which is Time stamped. 
-This pattern takes you through end to end flow of steps in collating statistics on such Time series data and identify if a Change point has occurred. Core building blocks would include computing Statistical parameters from the Time series data, which compares a Previous dataset of a certain Time range in the past with the Current Series in a recent Time range. Statistical comparison between these two results in detection of any change points. R statistical software is used in this pattern with sample Sensor data loaded into the Data Science experience cloud.
+
+This code pattern is intended for any developer who wants to experiment, learn, enhance and implement a new method for Statistically detecting Change point in Sensor data. Sensors mounted on devices like IoT devices, Automated manufacturing like Robot arms, Process monitoring and Control equipment etc., collect and transmit data on a continuous basis which is Time stamped. 
+
+This code pattern takes you through end to end flow of steps in collating statistics on such Time series data and identify if a Change point has occurred. Core building blocks would include computing Statistical parameters from the Time series data, which compares a Previous dataset of a certain Time range in the past with the Current Series in a recent Time range. Statistical comparison between these two results in detection of any change points. R statistical software is used in this pattern with sample Sensor data loaded into the Data Science experience cloud.
+
 All the intermediary steps are modularized and all code open sourced to enable developers to use / modify the modules / sub-modules as they see fit for their specific application.
 
-This pattern utilizes IoT sensor data and its primary goal is to statistically identify the change point in this sensor data rather than the acquisition and storage of the data itself. For sake of completeness of the flow, a simulation of the IoT data acquisition is included as a first step.
+This code pattern utilizes IoT sensor data and its primary goal is to statistically identify the change point in this sensor data rather than the acquisition and storage of the data itself. For sake of completeness of the flow, a simulation of the IoT data acquisition is included as a first step.
+
+![png](doc/source/images/cpd_arch_flow.png)
 
 A detailed pattern of acquisition and storage of IoT sensor data is already covered extensively elsewhere. References to the details of these patterns are also given.
 
-When you have completed this pattern, you will understand how to
+When you have completed this code pattern, you will understand how to
 
 * Write data from a IoT source to a database
 * Create and Run a Jupyter Notebook in Watson Studio
@@ -21,18 +24,20 @@ When you have completed this pattern, you will understand how to
 * Execute R statistical functions to detect Change point in data
 * Output and save results in Jupyter Notebook
 
-This pattern can be logically split into 2 major parts:
+This code pattern can be logically split into 2 major parts:
+
 * Data acquisition and storage of IoT Sensor data using Node Red flows and DB2: The Steps 1 to 4 below cover the details of this part of the pattern. 
 * Data retrieval and statistical analysis using R - Jupyter notebooks to analyze and detect change points in the data:  The Steps 5 to 8 below cover the details of this part of the pattern. 
 
-Click here to view the [IBM Pattern](https://developer.ibm.com/code/patterns/detect-change-points-in-iot-sensor-data/) for this project.
-
 ## Prerequisites
+
 You will need the following accounts and tools:
+
 * [IBM Cloud account](https://console.ng.bluemix.net/registration/)
 * [Bluemix CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/index.html#getting-started)
 
-#### Steps:
+## Steps:
+
 1.	Log into IBM Cloud and create IBM Cloud services  
 2.	Create Node-RED Application to load IoT data into DB2 table by using the provided [.json configuration file](configuration/node-red.json)  
 3.	Read IoT data from the sample csv file provided. The Node-RED flow can be changed to read from IoT devices directly  
@@ -56,9 +61,9 @@ Developer can reuse all components that support the above steps like
 
 * [IBM Watson Studio](https://www.ibm.com/bs-en/marketplace/data-science-experience): Analyze data using RStudio, Jupyter, and Python in a configured, collaborative environment that includes IBM value-adds, such as managed Spark.
 
-* [DB2 Warehouse on cloud](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud): IBM Db2 Warehouse on Cloud is a fully-managed, enterprise-class, cloud data warehouse service. Powered by IBM BLU Acceleration.
+* [DB2 Warehouse on Cloud](https://console.bluemix.net/catalog/services/db2-warehouse-on-cloud): IBM Db2 Warehouse on Cloud is a fully-managed, enterprise-class, cloud data warehouse service. Powered by IBM BLU Acceleration.
 
-* [Bluemix Object Storage](https://console.ng.bluemix.net/catalog/services/object-storage/?cm_sp=dw-bluemix-_-code-_-devcenter): An IBM Cloud service that provides an unstructured cloud data store to build and deliver cost effective apps and services with high reliability and fast speed to market.
+* [IBM Cloud Object Storage](https://console.ng.bluemix.net/catalog/services/object-storage/?cm_sp=dw-bluemix-_-code-_-devcenter): An IBM Cloud service that provides an unstructured cloud data store to build and deliver cost effective apps and services with high reliability and fast speed to market.
 
 * [Internet of Things Platform](https://console.bluemix.net/catalog/services/internet-of-things-platform): This service is the hub for IBM Watson IoT and lets you communicate with and consume data from connected devices and gateways. Use the built-in web console dashboards to monitor your IoT data and analyze it in real time.
 
@@ -176,7 +181,6 @@ The flow json for Node-RED can be found under `configuration` directory.
  #### Deploy the Node-RED flow by clicking on the `Deploy` button
 
 ![](doc/source/images/cpd_bmx_nodered_deploy.png)
-<br/>
 
 Node-red flow is designed as:  
  1.	The csv file with sample sensor data is uploaded in object storage.
@@ -188,7 +192,7 @@ Node-red flow is designed as:
   
   
  #### Inject the data in Node-RED Flow
-  In Node-RED Flow, click on the input of `inject` node. It will trigger the execution of the node-red flow and on successful execution, data will get stored to DB2 table `CHANGEPOINTIOT`.
+In Node-RED Flow, click on the input of `inject` node. It will trigger the execution of the node-red flow and on successful execution, data will get stored to DB2 table `CHANGEPOINTIOT`.
 
 ## 4. Create the R Spark Jupyter notebook
 
@@ -347,4 +351,3 @@ Deployment tracking can be disabled by removing the `require("metrics-tracker-cl
 # License
 
 [Apache 2.0](LICENSE)
-
