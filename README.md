@@ -45,7 +45,7 @@ You will need the following accounts and tools:
 3.	Read IoT data from the sample csv file provided. The Node-RED flow can be changed to read from IoT devices directly  
 4.	Import the [sample data](data/sample_sensordata2016_1s3dys.csv) into a DB2 table using the Node-RED flow  
 5.	User configures the parameters in [.json dsx configuration file](configuration/cpd_dsx_config.json) that will be used in Data Science experience and updates credentials to read the configuration file  
-6.	In R notebook flow,  user then updates credentials to read relevant Sensor data subset from the DB2 table. Data from the cloud database will be read by R Spark dataframe in Watson Studio notebook. The user will further extract the 2 series of datasets to be compared. R notebook will use open R libraries and Custom built function components to get the statistics computed.User will generate visual comparison charts to get visual insights on changes in behavior of the sensor values. These Statistical metrics will be compared and the changes analyzed using the Custom functions written in R  
+6.	In R notebook flow,  user then updates credentials to read relevant Sensor data subset from the DB2 table. Data from the cloud database will be read by R Spark dataframe in Watson Studio notebook. The user will further extract the 2 series of datasets to be compared. R notebook will use open R libraries and Custom built function components to get the statistics computed. User will generate visual comparison charts to get visual insights on changes in behavior of the sensor values. These Statistical metrics will be compared and the changes analyzed using the Custom functions written in R  
 7.	In Data science experience R runs on Spark engine to ensure scalability and performance  
 8.	Object storage is used to store the configuration file where Watson Studio reads the parameters from. The results can also be stored in Object storage if needed  
 
@@ -153,7 +153,7 @@ Create the Node-RED Starter application by following the link. Choose an appropr
   * On the `Browse available IBM Cloud nodes` screen, click on `Next`
   * On the `Finish the install` screen, click on Finish
   * Click on `Go to your Node-RED flow editor` 
-  * Install the following nodes before importing the flow. To do this select ‘Manage Palette’ from the menu (top right), and then select the install tab in the palette. Search for new nodes name to install and click on install.
+  * Install the following nodes before importing the flow. To do this select ‘Manage Palette’ from the menu (top right), and then select the install tab in the palette. Search for new nodes name to install and click on `Install`.
   
     - `node-red-contrib-objectstore`
     
@@ -167,7 +167,7 @@ Create the Node-RED Starter application by following the link. Choose an appropr
 The flow json for Node-RED can be found under `configuration` directory. 
 * Download the `configuration/node-red.json`
 * Open the file with a text editor and copy the contents to Clipboard
-* On the Node-RED flow editor, click the Menu and select Import -> Clipboard and paste the contents
+* On the Node-RED flow editor, click the Menu and select `Import` -> `Clipboard` and paste the contents
 
   ![png](doc/source/images/cpd_bmx_import_nodered_flow.png)
  
@@ -186,7 +186,7 @@ The flow json for Node-RED can be found under `configuration` directory.
 
 Node-red flow is designed as:  
  1.	The csv file with sample sensor data is uploaded in object storage.
- 2.	Prepare a csv string from the sample data file and give this string, as an input  to csv node.
+ 2.	Prepare a csv string from the sample data file and give this string, as an input to csv node.
  3.	csv node will act as a device simulator and it will trigger an event of temperature sensor for each row of data.
  4.	The events sent by temperature sensor will be received by IBM IoT Platform.
  5.	This data will be prepared and then stored in the database.
@@ -253,7 +253,7 @@ in section 2.1.3
 #### Add the data and configuration to the notebook
 Use `Find and Add Data` (look for the `10/01` icon)
 and its `Connectsions` tab. You must be able to see your database connection created earlier.
-From there you can click `Insert to Code` under the 'Data connection' list and add ibm DBR code
+From there you can click `Insert to Code` under the `Data connection` list and add `ibm DBR code`
 with connection credentials to the flow.
 
 ![png](doc/source/images/cpd_connreaddata_fromdashdb.png)
@@ -339,13 +339,13 @@ This web application includes code to track deployments to [IBM Cloud](https://w
 * Node-RED package version
 * Labels of bound services
 * Number of instances for each bound service and associated plan information
-* Metadata in the repository.yaml file
+* Metadata in the `repository.yaml` file
 
 This data is collected from the `package.json` and `repository.yaml` file in the sample application and the `VCAP_APPLICATION` and `VCAP_SERVICES` environment variables in IBM Cloud and other Cloud Foundry platforms. This data is used by IBM to track metrics around deployments of sample applications to IBM Cloud to measure the usefulness of our examples, so that we can continuously improve the content we offer to you. Only deployments of sample applications that include code to ping the Deployment Tracker service will be tracked.
 
 ## Disabling deployment tracking
 
-Deployment tracking can be disabled by removing the `require("metrics-tracker-client").track();` line from the 'index.js' file.
+Deployment tracking can be disabled by removing the `require("metrics-tracker-client").track();` line from the `index.js` file.
 
 # License
 
