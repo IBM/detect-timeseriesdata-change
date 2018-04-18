@@ -4,7 +4,7 @@ Troubleshooting
 Jupyter Notebooks
 -----------------
 
-* Whie creating the Notebook make sure you chose R, Spark as the environment.
+* While creating the Notebook make sure you chose R, Spark as the environment.
   The default will be Python, pay special attention to change this.
 * Make sure the install.packages() ran correctly. You might need to restart the
   kernel and run the cells from the top after the pip install runs the first
